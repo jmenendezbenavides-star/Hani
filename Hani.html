@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girasoles para tu Cumpleaños 16</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #87CEEB, #E0F7FF);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 3px solid #FFD700;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #DAA520;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .age {
+            font-size: 5rem;
+            color: #ff1d1d;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #5f0909;
+            animation: pulse 5s infinite;
+        }
+        
+        .message {
+            font-size: 1.3rem;
+            color: #000000;
+            max-width: 800px;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+        
+        .sunflower-field {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin: 40px 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: linear-gradient(to bottom, #8BC34A, #4CAF50);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Estilos para los girasoles */
+        .sunflower {
+            position: absolute;
+            z-index: 2;
+            transition: transform 0.5s;
+        }
+        
+        .sunflower:hover {
+            transform: scale(1.1);
+        }
+        
+        .center {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(#8B4513, #5D2906);
+            border-radius: 50%;
+            position: absolute;
+            top: 90%;
+            left: 90%;
+            transform: translate(0%, 0%);
+            z-index: 1;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 40px;
+            height: 80px;
+            background: radial-gradient(#FFD700, #FF8C00);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: -30px;
+            left: 10px;
+            transform-origin: center 60px;
+        }
+        
+        .stem {
+            position: absolute;
+            width: 12px;
+            height: 200px;
+            background: linear-gradient(to right, #228B22, #32CD32);
+            top: 60px;
+            left: 24px;
+            border-radius: 2px;
+            z-index: 0;
+        }
+        
+        .leaf {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #228B22;
+            border-radius: 50% 0 50% 0;
+            z-index: 0;
+        }
+        
+        .leaf-left {
+            top: 125px;
+            left: 15px;
+            transform: rotate(-25deg);
+        }
+        
+        .leaf-right {
+            top: 175px;
+            right: -15px;
+            transform: rotate(30deg);
+        }
+        
+        .sun {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(#FFD700, #FF8C00);
+            border-radius: 50%;
+            top: 30px;
+            right: 30px;
+            box-shadow: 0 0 40px #FFD700;
+            animation: sun-glow 3s infinite alternate;
+        }
+        
+        .sun-rays {
+            position: absolute;
+            width: 115px;
+            height: 120px;
+            top: -10px;
+            left: -10px;
+        }
+        
+        .ray {
+            position: absolute;
+            width: 6px;
+            height: 30px;
+            background-color: #FFD700;
+            top: -20%;
+            left: 50%;
+            transform-origin: center 85px;
+            border-radius: 2px;
+        }
+        
+        .cloud {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            opacity: 0.9;
+        }
+        
+        .controls {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        button {
+            background-color: #FFD700;
+            border: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #8B4513;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:hover {
+            background-color: #FFC107;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        button i {
+            margin-right: 8px;
+        }
+        
+        .dedication {
+            margin-top: 30px;
+            font-style: italic;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .footer {
+            margin-top: 25px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes sun-glow {
+            0% { box-shadow: 0 0 40px #FFD700; }
+            100% { box-shadow: 0 0 60px #FFD700, 0 0 80px #FFA500; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>¡Feliz Cumpleaños!</h1>
+            <div class="age">16</div>
+            <p class="message">
+                Feliz cumples mi Arancelito, mi super capi, mi razon por la cual segir adelante.
+                En este dia tan especial quiero decirte que eres una persona maravillosa, llena de luz y alegria
+                que apesar de tus problemas siempre encuentras la manera de estar ahi para mi y este detalle es 
+                de mi parte para agradecerte por todo lo que has hecho por mi y desearte lo mejor del mundo
+            </p>
+            <p class="dedication">Con mucho cariño Xaviercito. Alias Llamita 🔥✨</p>
+        </div>
+        
+        <div class="sunflower-field" id="sunflowerField">
+            <!-- El sol -->
+            <div class="sun">
+                <div class="sun-rays" id="sunRays"></div>
+            </div>
+            
+            <!-- Los girasoles se generarán con JavaScript -->
+        </div>
+        
+        <div class="controls">
+            <h3>¡Haz que los girasoles bailen!</h3>
+            <button id="danceBtn"><i class="fas fa-music"></i> Bailar al Ritmo</button>
+            <button id="addSunflowerBtn"><i class="fas fa-plus"></i> Añadir Girasol</button>
+            <button id="changeSkyBtn"><i class="fas fa-cloud-sun"></i> Cambiar Cielo</button>
+            <button id="resetBtn"><i class="fas fa-redo"></i> Reiniciar</button>
+        </div>
+        
+        <div class="footer">
+            <p>Creado con mucho cariño para una una amiga especial</p>
+            <p>Los girasoles simbolizan felicidad, vitalidad y la luz del sol</p>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let sunflowers = [];
+        let skyColors = [
+            {day: '#87CEEB', evening: '#E0F7FF'},
+            {day: '#FFB6C1', evening: '#FFE4E1'}, 
+            {day: '#FFDAB9', evening: '#FFF5E1'},
+            {day: '#B0E0E6', evening: '#F0F8FF'}
+        ];
+        let currentSky = 0;
+        let isDancing = false;
+        let danceInterval;
+        
+        // Elementos DOM
+        const sunflowerField = document.getElementById('sunflowerField');
+        const danceBtn = document.getElementById('danceBtn');
+        const addSunflowerBtn = document.getElementById('addSunflowerBtn');
+        const changeSkyBtn = document.getElementById('changeSkyBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const sunRays = document.getElementById('sunRays');
+        
+        // Crear rayos del sol
+        function createSunRays() {
+            sunRays.innerHTML = '';
+            for (let i = 0; i < 12; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'ray';
+                ray.style.transform = `rotate(${i * 30}deg)`;
+                sunRays.appendChild(ray);
+            }
+        }
+        
+        // Crear un girasol
+        function createSunflower(x, y) {
+            const sunflower = document.createElement('div');
+            sunflower.className = 'sunflower';
+            sunflower.style.left = `${x}px`;
+            sunflower.style.top = `${y}px`;
+            
+            // Tamaño aleatorio
+            const size = 0.7 + Math.random() * 0.6;
+            sunflower.style.transform = `scale(${size})`;
+            
+            // Centro del girasol
+            const center = document.createElement('div');
+            center.className = 'center';
+            sunflower.appendChild(center);
+            
+            // Pétalos
+            for (let i = 0; i < 12; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.transform = `rotate(${i * 30}deg)`;
+                sunflower.appendChild(petal);
+            }
+            
+            // Tallo
+            const stem = document.createElement('div');
+            stem.className = 'stem';
+            sunflower.appendChild(stem);
+            
+            // Hojas
+            const leaf1 = document.createElement('div');
+            leaf1.className = 'leaf leaf-left';
+            sunflower.appendChild(leaf1);
+            
+            const leaf2 = document.createElement('div');
+            leaf2.className = 'leaf leaf-right';
+            sunflower.appendChild(leaf2);
+            
+            // Añadir al campo
+            sunflowerField.appendChild(sunflower);
+            
+            // Guardar referencia
+            const sunflowerObj = {
+                element: sunflower,
+                x: x,
+                y: y,
+                size: size,
+                swayDirection: Math.random() > 0.5 ? 1 : -1,
+                swaySpeed: 0.5 + Math.random() * 1
+            };
+            
+            sunflowers.push(sunflowerObj);
+            
+            // Animación de balanceo
+            animateSunflower( sunflowerObj );
+            
+            return sunflowerObj;
+        }
+        
+        // Animar un girasol
+        function animateSunflower( sunflower ) {
+            if (isDancing) return;
+            
+            let angle = 0;
+            const sway = () => {
+                angle += 0.01 * sunflower.swayDirection * sunflower.swaySpeed;
+                const rotation = Math.sin(angle) * 3;
+                sunflower.element.style.transform = `scale(${sunflower.size}) rotate(${rotation}deg)`;
+                requestAnimationFrame(sway);
+            };
+            sway();
+        }
+        
+        // Crear nubes
+        function createClouds() {
+            // Limpiar nubes existentes
+            const existingClouds = document.querySelectorAll('.cloud');
+            existingClouds.forEach(cloud => cloud.remove());
+            
+            // Crear 4 nubes
+            for (let i = 0; i < 4; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                
+                // Tamaño y posición aleatorios
+                const size = 60 + Math.random() * 80;
+                cloud.style.width = `${size}px`;
+                cloud.style.height = `${size * 0.6}px`;
+                cloud.style.top = `${40 + Math.random() * 100}px`;
+                cloud.style.left = `${Math.random() * 100}%`;
+                
+                // Animación de flotación
+                cloud.style.animation = `float ${15 + Math.random() * 10}s infinite ease-in-out`;
+                cloud.style.animationDelay = `${Math.random() * 5}s`;
+                
+                sunflowerField.appendChild(cloud);
+            }
+        }
+        
+        // Inicializar campo de girasoles
+        function initializeSunflowers() {
+            // Limpiar girasoles existentes
+            sunflowers.forEach(sunflower => sunflower.element.remove());
+            sunflowers = [];
+            
+            // Crear girasoles en posiciones aleatorias
+            for (let i = 0; i < 8; i++) {
+                const x = 50 + Math.random() * (sunflowerField.clientWidth - 100);
+                const y = 150 + Math.random() * 200;
+                createSunflower(x, y);
+            }
+        }
+        
+        // Hacer bailar los girasoles
+        function makeSunflowersDance() {
+            isDancing = true;
+            
+            // Detener animaciones individuales
+            sunflowers.forEach(sunflower => {
+                sunflower.element.style.animation = `sway 0.5s infinite alternate`;
+                sunflower.element.style.animationTimingFunction = 'ease-in-out';
+            });
+            
+            // Cambiar texto del botón
+            danceBtn.innerHTML = '<i class="fas fa-stop"></i> Detener Baile';
+        }
+        
+        // Detener el baile
+        function stopDancing() {
+            isDancing = false;
+            
+            // Remover animación de baile
+            sunflowers.forEach(sunflower => {
+                sunflower.element.style.animation = '';
+                // Reanudar animación individual
+                animateSunflower( sunflower );
+            });
+            
+            // Restaurar texto del botón
+            danceBtn.innerHTML = '<i class="fas fa-music"></i> Bailar al Ritmo';
+        }
+        
+        // Cambiar el color del cielo
+        function changeSky() {
+            currentSky = (currentSky + 1) % skyColors.length;
+            const colors = skyColors[currentSky];
+            document.body.style.background = `linear-gradient(to bottom, ${colors.day}, ${colors.evening})`;
+            
+            // Cambiar color del sol según el cielo
+            const sun = document.querySelector('.sun');
+            if (currentSky === 1) { // cielo rosa
+                sun.style.background = 'radial-gradient(#FF69B4, #FF1493)';
+                document.querySelectorAll('.ray').forEach(ray => {
+                    ray.style.backgroundColor = '#FF69B4';
+                });
+            } else if (currentSky === 2) { // cielo naranja
+                sun.style.background = 'radial-gradient(#FFA500, #FF4500)';
+                document.querySelectorAll('.ray').forEach(ray => {
+                    ray.style.backgroundColor = '#FFA500';
+                });
+            } else { // cielo normal
+                sun.style.background = 'radial-gradient(#FFD700, #FF8C00)';
+                document.querySelectorAll('.ray').forEach(ray => {
+                    ray.style.backgroundColor = '#FFD700';
+                });
+            }
+        }
+        
+        // Reiniciar todo
+        function resetAll() {
+            stopDancing();
+            currentSky = 0;
+            const colors = skyColors[currentSky];
+            document.body.style.background = `linear-gradient(to bottom, ${colors.day}, ${colors.evening})`;
+            initializeSunflowers();
+            createClouds();
+        }
+        
+        // Event Listeners
+        danceBtn.addEventListener('click', () => {
+            if (isDancing) {
+                stopDancing();
+            } else {
+                makeSunflowersDance();
+            }
+        });
+        
+        addSunflowerBtn.addEventListener('click', () => {
+            const x = 50 + Math.random() * (sunflowerField.clientWidth - 100);
+            const y = 150 + Math.random() * 200;
+            createSunflower(x, y);
+        });
+        
+        changeSkyBtn.addEventListener('click', changeSky);
+        
+        resetBtn.addEventListener('click', resetAll);
+        
+        // Inicializar todo cuando se carga la página
+        window.addEventListener('load', () => {
+            createSunRays();
+            initializeSunflowers();
+            createClouds();
+        });
+        
+        // Ajustar girasoles cuando cambia el tamaño de la ventana
+        window.addEventListener('resize', initializeSunflowers);
+    </script>
+</body>
+</html>
